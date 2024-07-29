@@ -341,7 +341,7 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.IO.Redist">
-      <Version>6.0.0</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.SDK">
       <Version>17.10.40171</Version>
