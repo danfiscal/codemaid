@@ -45,7 +45,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(language, text);
 
-            Assert.IsTrue(headerLength > 0, $"Expecting value > 0, found {headerLength}");
+            Assert.That(headerLength > 0, $"Expecting value > 0, found {headerLength}");
         }
 
         [TestCase(CodeLanguage.CSharp, "# some CSharp test header\r\n")]
@@ -67,7 +67,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(language, text);
 
-            Assert.IsTrue(headerLength == 0, $"Expecting 0, found {headerLength}");
+            Assert.That(headerLength == 0, $"Expecting 0, found {headerLength}");
         }
 
         [TestCase("/* */", "/*", "*/")]
@@ -83,7 +83,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, false);
             var expectedLength = text.Length - Regex.Matches(text, Environment.NewLine).Count + 1;
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("using System;\r\n/* */", "/*", "*/", 6)]
@@ -92,7 +92,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, true);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("\r\n/* */", "/*", "*/")]
@@ -103,7 +103,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, false);
             var expectedLength = text.Length - Regex.Matches(text, Environment.NewLine).Count + 1;
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("using EnvDTE;\r\nusing System;\r\nusing SteveCadwallader.CodeMaid.Helpers;\r\n\r\n\r\n/* \r\n   Copyright © 2021 \r\n */", "/*", "*/", 29)]
@@ -112,7 +112,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, true);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("", "/*", "*/")]
@@ -124,7 +124,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, false);
 
-            Assert.IsTrue(headerLength == 0, $"Expecting 0, found {headerLength}");
+            Assert.That(headerLength == 0, $"Expecting 0, found {headerLength}");
         }
 
         [TestCase("using System;", "/*", "*/")]
@@ -135,7 +135,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tagStart, tagEnd, true);
 
-            Assert.IsTrue(headerLength == 0, $"Expecting 0, found {headerLength}");
+            Assert.That(headerLength == 0, $"Expecting 0, found {headerLength}");
         }
 
         [TestCase("//", "// header fdsfndksjnfe\r\n")]
@@ -149,7 +149,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, false);
             var expectedLength = text.Length - Regex.Matches(text, Environment.NewLine).Count;
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("//", "using System;\r\n// header\r\nnamespace ", 11)]
@@ -158,7 +158,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, true);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("//", "//  header \r\nnamespace\r\npublic class Test\r\n", 12)]
@@ -169,7 +169,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, false);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("//", "using System;\r\n\r\n//  header \r\nnamespace System.Windows;\r\npublic class Test\r\n", 13)]
@@ -179,7 +179,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, true);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("//", "\r\n//  header \r\n// header\r\nnamespace\r\n//not header\r\n public class Test\r\n", 23)]
@@ -190,7 +190,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, false);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("//", "using System;\r\n\r\n\r\n//  header \r\n// header\r\nnamespace \r\n//not header\r\n public class Test\r\n", 23)]
@@ -199,7 +199,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var headerLength = FileHeaderHelper.GetHeaderLength(text, tag, true);
 
-            Assert.IsTrue(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
+            Assert.That(headerLength == expectedLength, $"Expecting {expectedLength}, found {headerLength}");
         }
 
         [TestCase("using ", "", "", 0)]
@@ -211,7 +211,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         {
             var nbLines = FileHeaderHelper.GetNbLinesToSkip(patternToFind, text, new List<string>() { limit });
 
-            Assert.IsTrue(nbLines == expectedNbLines, $"Expecting {expectedNbLines}, found {expectedNbLines}");
+            Assert.That(nbLines == expectedNbLines, $"Expecting {expectedNbLines}, found {expectedNbLines}");
         }
     }
 }

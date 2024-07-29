@@ -16,7 +16,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         }
 
         [TestMethod]
-        public async Task CallbackShouldBeCalledAtOnce()
+        public async Task CallbackShouldBeCalledAtOnceAsync()
         {
             var monitor = new SettingsMonitor<Settings>(Settings.Default, null);
 
@@ -32,7 +32,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         }
 
         [TestMethod]
-        public async Task CallbackShouldNotBeCalledIfSettingNotChanged()
+        public async Task CallbackShouldNotBeCalledIfSettingNotChangedAsync()
         {
             Settings.Default.Feature_CleanupAllCode = false;
             var monitor = new SettingsMonitor<Settings>(Settings.Default, null);
@@ -55,7 +55,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         }
 
         [TestMethod]
-        public async Task CallbackShouldBeCalledOnceSettingChanged()
+        public async Task CallbackShouldBeCalledOnceSettingChangedAsync()
         {
             Settings.Default.Feature_CleanupAllCode = false;
             var monitor = new SettingsMonitor<Settings>(Settings.Default, null);
@@ -78,7 +78,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         }
 
         [TestMethod]
-        public async Task AllCallbacksShouldBeCalledOnceSettingChanged()
+        public async Task AllCallbacksShouldBeCalledOnceSettingChangedAsync()
         {
             Settings.Default.Feature_CleanupAllCode = false;
             var monitor = new SettingsMonitor<Settings>(Settings.Default, null);
@@ -110,7 +110,7 @@ namespace SteveCadwallader.CodeMaid.UnitTests.Helpers
         }
 
         [TestMethod]
-        public async Task CallbackShouldBeCalledOnceAnyWatchedSettingChanged()
+        public async Task CallbackShouldBeCalledOnceAnyWatchedSettingChangedAsync()
         {
             Settings.Default.Feature_CleanupAllCode = false;
             Settings.Default.Feature_CleanupOpenCode = false;
